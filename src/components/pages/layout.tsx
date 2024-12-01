@@ -1,17 +1,16 @@
+import { SiteBanner } from "./layout/site-banner";
+import { SiteFooter } from "./layout/site-footer";
+import { SiteHeader } from "./layout/site-header";
+import { ThemeProvider } from "./layout/theme";
 
-export function Layout(){
+export function Layout({children}: {children: React.ReactNode}) {
   return (
+    <>
           <SiteBanner />
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <ThemeProvider  defaultTheme="system">
             <SiteHeader />
             {children}
-            <SiteFooter />
-            <TailwindIndicator />
-            <Script
-            src="https://cloud.umami.is/script.js"
-            strategy="afterInteractive"
-            data-website-id="7ad28072-1308-433d-abce-2e92a70ab64d"
-            defer
-          />
+            <SiteFooter /> 
           </ThemeProvider>
+    </>
   )}
