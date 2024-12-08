@@ -45,7 +45,7 @@ export function EntitiesList({ params}: { params: {tableName:string} }) {
         {data && data.map(row => (
           <tr key={row.id}>
             {columns.map(column => <td key={column.name}>{row[column.name]}</td>)}
-            <td><Link href={`/entities/${tableName}/new`}> edit </Link></td>
+            <td><Link href={`/entities/${tableName}/${row.id}`}> edit </Link></td>
     
           </tr>
         ))}

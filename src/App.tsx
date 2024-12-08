@@ -4,6 +4,7 @@ import { Route, Switch } from 'wouter'
 import { Entities } from './pages/entities'
 import { EntitiesList } from './pages/entities/list'
 import { useEntities } from './stores/entities';
+import { EntityEdit } from './pages/entities/edit'
 
 function App() {
   useEntities();
@@ -15,6 +16,8 @@ function App() {
         <Switch >
         <Route path="/entities" ><Entities /></Route>
         <Route path="/entities/:tableName"  component={ EntitiesList} />
+        <Route path="/entities/:tableName/edit/"  component={ EntityEdit} />
+        <Route path="/entities/:tableName/:entityId"  component={ EntityEdit} />
         </Switch>
 
       

@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import axios from 'axios';
+import { siteConfig } from '@/config/site';
 
 interface EntityActions {
   get: (filter: Record<string, any>, refresh?: boolean) => Promise<any[]>;
@@ -29,7 +30,7 @@ export function useEntity(entityType: string): EntityActions {
 
     // Fetch from backend if data is not cached or refresh is true
     try {
-      const response = await axios.get(`/${entityType}`, { params: { where: filter } });
+      const response = await axios.get(`${siteConfig.backend.url}/v1/${entityType}`, { params: { where: filter } });
       useEntityStore.setState((state) => ({
         [entityType]: response.data,
       }));
@@ -42,7 +43,7 @@ export function useEntity(entityType: string): EntityActions {
 
   const set = async (id: number, data: Record<string, any>) => {
     try {
-      const response = await axios.post(`/${entityType}`, { id, ...data });
+      const response = await axios.post(`${siteConfig.backend.url}/v1/${entityType}`, { id, ...data });
       useEntityStore.setState((state) => ({
         [entityType]: state[entityType]?.map((entity) =>
           entity.id === id ? { ...entity, ...response.data } : entity
@@ -55,7 +56,7 @@ export function useEntity(entityType: string): EntityActions {
 
   const del = async (id: number) => {
     try {
-      await axios.delete(`/${entityType}/${id}`);
+      await axios.delete(`${siteConfig.backend.url}/v1/${entityType}/${id}`);
       useEntityStore.setState((state) => ({
         [entityType]: state[entityType]?.filter((entity) => entity.id !== id),
       }));
@@ -66,7 +67,7 @@ export function useEntity(entityType: string): EntityActions {
 
   const fetchAll = async () => {
     try {
-      const response = await axios.get(`/${entityType}`);
+      const response = await axios.get(`${siteConfig.backend.url}/v1/${entityType}`);
       useEntityStore.setState((state) => ({
         [entityType]: response.data,
       }));
