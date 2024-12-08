@@ -10,7 +10,8 @@ function App() {
 
   return (
     <Layout>
-        <Route path="/" ></Route>
+        <Route path="/" >
+        </Route>
         <Route path="/entities" >
           <Route path="/entities/:tableName"  component={ EntitiesList} />
           <Entities />

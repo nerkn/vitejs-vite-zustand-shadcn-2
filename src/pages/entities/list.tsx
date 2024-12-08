@@ -1,11 +1,11 @@
 import { siteConfig } from '@/config/site';
-import { useEntitiesStore } from '@/stores/entities'
+import { useEntities } from '@/stores/entities'
 import axios from 'axios' 
 import { useEffect, useState } from 'react'; 
 
 export function EntitiesList({ params}: { params: {tableName:string} }) {
 
-  const { columns } = useEntitiesStore()
+  const { columns } = useEntities()
   const [data, setData] = useState<any[]>([]);
   const [filter, setFilter] = useState('');
   const [filterValue, setFilterValue]   = useState('');

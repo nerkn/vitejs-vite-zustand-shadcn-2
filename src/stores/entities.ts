@@ -38,8 +38,8 @@ export const useEntities = create<EntitiesState>()(
           const data = await response.json()
           console.log("response", data)
           set({ 
-            tables: data.data.tables,
-            columns: data.data.columns,
+            tables: data.tables,
+            columns: data.columns,
             isLoading: false 
           })
         } catch (error) {
