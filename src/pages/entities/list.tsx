@@ -2,25 +2,31 @@ import { siteConfig } from '@/config/site';
 import { useEntities } from '@/stores/entities'
 import axios from 'axios' 
 import { useEffect, useState } from 'react'; 
+import { Link } from 'wouter';
 
 export function EntitiesList({ params}: { params: {tableName:string} }) {
 
-  const { columns } = useEntities()
+  const { columns:columnsAll } = useEntities()
   const [data, setData] = useState<any[]>([]);
   const [filter, setFilter] = useState('');
   const [filterValue, setFilterValue]   = useState('');
   let tableName = params.tableName;
+  let columns = columnsAll.filter(column=>column.table==tableName)
 
   useEffect(() => {
-    axios.get(`${siteConfig.backend.url}/v1/${tableName}?${filter}=${filterValue}`)
+    let where = (filter && filterValue)?`?where=${filter}+like+%${filterValue}%`:''
+    axios.get(`${siteConfig.backend.url}/v1/${tableName}${where}`)
       .then(response => {
-        console.log(response.data);
-        setData(response.data);
+        if(response.data.error)
+          return console.log('error', response.data);
+
+        setData(response.data.data);
       })
   }, [filter, filterValue]);
 
+
   return (
-    <div>
+    <div>EntitiesList
     <form>
         <select onChange={e => setFilter(e.target.value)}>
           <option value="">All</option>
@@ -28,7 +34,7 @@ export function EntitiesList({ params}: { params: {tableName:string} }) {
         </select>
       <input type="text" onChange={e => setFilterValue(e.target.value)} />
     </form>
-
+    <Link href={`/entities/${tableName}/new`}> New </Link>
     <table>
       <thead>
         <tr>
@@ -39,6 +45,8 @@ export function EntitiesList({ params}: { params: {tableName:string} }) {
         {data && data.map(row => (
           <tr key={row.id}>
             {columns.map(column => <td key={column.name}>{row[column.name]}</td>)}
+            <td><Link href={`/entities/${tableName}/new`}> edit </Link></td>
+    
           </tr>
         ))}
       </tbody>
