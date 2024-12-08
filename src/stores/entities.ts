@@ -19,7 +19,7 @@ interface EntitiesState {
   getTableColumns: (tableName: string) => ColumnDefinition[]
 }
 
-export const useEntitiesStore = create<EntitiesState>()(
+export const useEntities = create<EntitiesState>()(
   persist(
     (set, get) => ({
       tables: [],

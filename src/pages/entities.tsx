@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useEntitiesStore } from '@/stores/entities'
+import { useEntities } from '@/stores/entities'
 import {
   Table,
   TableBody,
@@ -18,7 +18,7 @@ import {
 import { Link } from 'wouter'
 
 export function Entities() {
-  const { tables, columns, isLoading, error, fetchEntities, getTableColumns } = useEntitiesStore()
+  const { tables, columns, isLoading, error, fetchEntities, getTableColumns } = useEntities();
 
   useEffect(() => {
     fetchEntities()

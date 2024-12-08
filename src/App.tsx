@@ -3,9 +3,10 @@ import './App.css'
 import { Route } from 'wouter'
 import { Entities } from './pages/entities'
 import { EntitiesList } from './pages/entities/list'
+import { useEntities } from './stores/entities';
 
 function App() {
-  
+  useEntities();
 
   return (
     <Layout>
