@@ -19,7 +19,7 @@ interface EntitiesState {
   getTableColumns: (tableName: string) => ColumnDefinition[]
 }
 
-export const useEntitiesStore = create<EntitiesState>()(
+export const useEntities = create<EntitiesState>()(
   persist(
     (set, get) => ({
       tables: [],
@@ -38,8 +38,8 @@ export const useEntitiesStore = create<EntitiesState>()(
           const data = await response.json()
           console.log("response", data)
           set({ 
-            tables: data.data.tables,
-            columns: data.data.columns,
+            tables: data.tables,
+            columns: data.columns,
             isLoading: false 
           })
         } catch (error) {

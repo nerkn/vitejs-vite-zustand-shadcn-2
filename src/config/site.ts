@@ -5,8 +5,8 @@ export const siteConfig ={
     github: 'https://github.com/nerkn',
   },
   backend: {
-    url: 'http://panelim.siparisci.com:3300/api',
     tablePrefix: '',
+    url: 'https://easy.siparisci.com:2096/api',
     routes: {
       auth: '/auth',
       profile: '/profile',
