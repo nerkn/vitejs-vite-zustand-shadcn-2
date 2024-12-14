@@ -4,18 +4,20 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'; 
 
 export function EntitiesList({ params}: { params: {tableName:string} }) {
-
   const { columns } = useEntitiesStore()
   const [data, setData] = useState<any[]>([]);
   const [filter, setFilter] = useState('');
   const [filterValue, setFilterValue]   = useState('');
-  let tableName = params.tableName;
+  let tableName = params.tableName.replace(siteConfig.backend.tablePrefix, '');
 
   useEffect(() => {
-    axios.get(`${siteConfig.backend.url}/v1/${tableName}?${filter}=${filterValue}`)
+    let filterNow = (filter && filterValue) ? `where=${filter}=${filterValue}` : '';
+    axios.get(`${siteConfig.backend.url}/v1/${tableName}?${filterNow}`)
       .then(response => {
         console.log(response.data);
-        setData(response.data);
+        if(!response.data) 
+          setData([]);
+        setData(response.data.data);
       })
   }, [filter, filterValue]);
 

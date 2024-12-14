@@ -6,6 +6,7 @@ export const siteConfig ={
   },
   backend: {
     url: 'http://panelim.siparisci.com:3300/api',
+    tablePrefix: '',
     routes: {
       auth: '/auth',
       profile: '/profile',

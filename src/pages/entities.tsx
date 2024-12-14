@@ -44,7 +44,7 @@ export function Entities() {
             </AccordionTrigger>
             <AccordionContent>
               <div className="mb-4">
-                <Link href={`/entities/${tableName}/edit`}>{'Edit ' + tableName}</Link>
+                <Link href={`/entities/${tableName}`}>{'Edit ' + tableName}</Link>
               </div>
 
               <Table>
